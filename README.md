@@ -78,7 +78,7 @@ func UpdatePasswordLambda(ctx context.Context, lambdaReq events.APIGatewayProxyR
 		return ERROR - unauthorized
 	}
 
-	hash, err := argon2id.Hash(updatePasswordReq.NewPassword)
+	hash, err := lambda_argon.Hash(updatePasswordReq.NewPassword)
 	if err != nil {
 		return ERROR - bad request
 	}
