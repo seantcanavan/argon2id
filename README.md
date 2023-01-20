@@ -91,3 +91,75 @@ func UpdatePasswordLambda(ctx context.Context, lambdaReq events.APIGatewayProxyR
     return SUCCESS
 }
 ```
+
+## All tests are passing
+```
+Fri Jan 20 03:33 PM lambda_argon: make test
+go test ./... -v
+=== RUN   TestCreateHash
+=== RUN   TestCreateHash/verify_hash_output_matches_expected_regex_for_short_password
+=== RUN   TestCreateHash/verify_same_password_produces_different_hashes_for_short_password
+=== RUN   TestCreateHash/verify_hash_output_matches_expected_regex_for_long_password
+=== RUN   TestCreateHash/verify_same_password_produces_different_hashes_for_long_password
+--- PASS: TestCreateHash (0.73s)
+    --- PASS: TestCreateHash/verify_hash_output_matches_expected_regex_for_short_password (0.00s)
+    --- PASS: TestCreateHash/verify_same_password_produces_different_hashes_for_short_password (0.00s)
+    --- PASS: TestCreateHash/verify_hash_output_matches_expected_regex_for_long_password (0.00s)
+    --- PASS: TestCreateHash/verify_same_password_produces_different_hashes_for_long_password (0.00s)
+=== RUN   TestCheckHash
+=== RUN   TestCheckHash/verify_checkHash_works_for_short_password_/_hash
+=== RUN   TestCheckHash/verify_checkHash_works_for_long_password_/_hash
+=== RUN   TestCheckHash/verify_checkHash_with_hard_coded_values
+=== RUN   TestCheckHash/verify_checkHash_fails_with_tampered_hash_value
+=== RUN   TestCheckHash/verify_err_when_using_wrong_argon_variant
+--- PASS: TestCheckHash (0.73s)
+    --- PASS: TestCheckHash/verify_checkHash_works_for_short_password_/_hash (0.18s)
+    --- PASS: TestCheckHash/verify_checkHash_works_for_long_password_/_hash (0.18s)
+    --- PASS: TestCheckHash/verify_checkHash_with_hard_coded_values (0.02s)
+    --- PASS: TestCheckHash/verify_checkHash_fails_with_tampered_hash_value (0.00s)
+    --- PASS: TestCheckHash/verify_err_when_using_wrong_argon_variant (0.00s)
+=== RUN   TestComparePasswordAndHash
+=== RUN   TestComparePasswordAndHash/verify_compare_with_correct_short_password
+=== RUN   TestComparePasswordAndHash/verify_err_with_wrong_password_for_short_password_hash
+=== RUN   TestComparePasswordAndHash/verify_compare_with_correct_long_password
+=== RUN   TestComparePasswordAndHash/verify_err_with_wrong_password_for_long_password
+--- PASS: TestComparePasswordAndHash (1.09s)
+    --- PASS: TestComparePasswordAndHash/verify_compare_with_correct_short_password (0.18s)
+    --- PASS: TestComparePasswordAndHash/verify_err_with_wrong_password_for_short_password_hash (0.20s)
+    --- PASS: TestComparePasswordAndHash/verify_compare_with_correct_long_password (0.18s)
+    --- PASS: TestComparePasswordAndHash/verify_err_with_wrong_password_for_long_password (0.18s)
+=== RUN   TestDecodeHash
+=== RUN   TestDecodeHash/verify_shortParams_returned_are_correct
+=== RUN   TestDecodeHash/verify_shortSalt_length_is_correct
+=== RUN   TestDecodeHash/verify_shortKey_length_is_correct
+=== RUN   TestDecodeHash/verify_longParams_returned_are_correct
+=== RUN   TestDecodeHash/verify_longSalt_length_is_correct
+=== RUN   TestDecodeHash/verify_longKey_length_is_correct
+--- PASS: TestDecodeHash (0.35s)
+    --- PASS: TestDecodeHash/verify_shortParams_returned_are_correct (0.00s)
+    --- PASS: TestDecodeHash/verify_shortSalt_length_is_correct (0.00s)
+    --- PASS: TestDecodeHash/verify_shortKey_length_is_correct (0.00s)
+    --- PASS: TestDecodeHash/verify_longParams_returned_are_correct (0.00s)
+    --- PASS: TestDecodeHash/verify_longSalt_length_is_correct (0.00s)
+    --- PASS: TestDecodeHash/verify_longKey_length_is_correct (0.00s)
+=== RUN   TestHash
+=== RUN   TestHash/verify_password_hashes_without_error
+--- PASS: TestHash (0.17s)
+    --- PASS: TestHash/verify_password_hashes_without_error (0.17s)
+=== RUN   TestMatch
+=== RUN   TestMatch/verify_password_matches_without_error
+--- PASS: TestMatch (0.36s)
+    --- PASS: TestMatch/verify_password_matches_without_error (0.36s)
+=== RUN   TestVerifyPasswordRequirements
+=== RUN   TestVerifyPasswordRequirements/verify_error_when_password_is_below_minimum
+=== RUN   TestVerifyPasswordRequirements/verify_error_when_password_is_above_maximum
+=== RUN   TestVerifyPasswordRequirements/verify_no_error_when_input_is_minimum
+=== RUN   TestVerifyPasswordRequirements/verify_no_error_when_input_is_maximum
+--- PASS: TestVerifyPasswordRequirements (0.00s)
+    --- PASS: TestVerifyPasswordRequirements/verify_error_when_password_is_below_minimum (0.00s)
+    --- PASS: TestVerifyPasswordRequirements/verify_error_when_password_is_above_maximum (0.00s)
+    --- PASS: TestVerifyPasswordRequirements/verify_no_error_when_input_is_minimum (0.00s)
+    --- PASS: TestVerifyPasswordRequirements/verify_no_error_when_input_is_maximum (0.00s)
+PASS
+ok  	github.com/seantcanavan/lambda_argon	3.437s
+```

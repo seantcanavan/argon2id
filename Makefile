@@ -9,4 +9,4 @@ format:
 	gofmt -s -w -l .
 
 test:
-	go test ./...
+	go test ./... -v
